@@ -2590,6 +2590,65 @@ This allows using a different mpirun command to launch unit tests
     </module_system>
   </machine>
 
+  <machine MACH="sariyer">
+    <DESC>Intel Xeon Platinum 8160 ("Skylake"),48 cores on two sockets (24 cores/socket) , batch system is SLURM</DESC>
+    <NODENAME_REGEX>sariyer*</NODENAME_REGEX>
+    <OS>LINUX</OS>
+    <COMPILERS>intel</COMPILERS>
+    <MPILIBS>impi</MPILIBS>
+    <PROJECT>gooogr</PROJECT>
+    <CIME_OUTPUT_ROOT>$ENV{HOME}</CIME_OUTPUT_ROOT>
+    <DIN_LOC_ROOT>/okyanus/users/milicak/dataset/CESM/inputdata</DIN_LOC_ROOT>
+    <DIN_LOC_ROOT_CLMFORC>/okyanus/users/milicak/dataset/CESM/inputdata/lmwg</DIN_LOC_ROOT_CLMFORC>
+    <DOUT_S_ROOT>$ENV{WORK}/archive/$CASE</DOUT_S_ROOT>
+    <BASELINE_ROOT>/okyanus/users/milicak/dataset/CESM/cesm_baselines</BASELINE_ROOT>
+    <CCSM_CPRNC>/okyanus/users/milicak/dataset/CESM/cime/tools/cprnc/cprnc</CCSM_CPRNC>
+    <GMAKE_J>4</GMAKE_J>
+    <BATCH_SYSTEM>slurm</BATCH_SYSTEM>
+    <SUPPORTED_BY>cseg</SUPPORTED_BY>
+    <MAX_TASKS_PER_NODE>28</MAX_TASKS_PER_NODE>
+    <MAX_MPITASKS_PER_NODE>28</MAX_MPITASKS_PER_NODE>
+    <mpirun mpilib="impi">
+      <executable>mpirun</executable>
+      <arguments>
+	<arg name="ntasks"> -n {{ total_tasks }} </arg>
+      </arguments>
+    </mpirun>
+    <module_system type="module">
+      <init_path lang="perl">/usr/share/Modules/init/perl.m</init_path>
+      <init_path lang="sh">/etc/profile.d/modules.sh</init_path>
+      <init_path lang="csh">/etc/profile.d/modules.csh</init_path>
+      <cmd_path lang="perl">/bin/perl</cmd_path>
+      <cmd_path lang="python">/usr/bin/modulecmd Python/python-2.7.14</cmd_path>
+      <cmd_path lang="sh">module</cmd_path>
+      <cmd_path lang="csh">module</cmd_path>
+      <modules>
+        <command name="purge"></command>
+	<command name="load">Python/python-2.7.14</command>
+        <command name="load">intel/parallel_studio_xe_2017.0.035</command>
+        <command name="load">cmake/3.10.1</command>
+      </modules>
+      <modules mpilib="impi">
+        <command name="load">intel/impi_2017.3.196</command>
+        <command name="load">pnetcdf/1.11.0</command>
+        <command name="load">parallel-netcdf/4.3.3.1</command>
+      </modules>
+    </module_system>
+    <environment_variables>
+      <env name="OMP_STACKSIZE">256M</env>
+     </environment_variables>
+    <environment_variables comp_interface="nuopc" mpilib="impi">
+      <env name="ESMFMKFILE">/okyanus/users/uturuncoglu/progs/esmf-8.0.0b41/install_dir/lib/libO/Linux.intel.64.intelmpi.default/esmf.mk</env>
+    </environment_variables>
+    <environment_variables comp_interface="nuopc">
+      <env name="ESMF_RUNTIME_PROFILE">ON</env>
+      <env name="ESMF_RUNTIME_PROFILE_OUTPUT">SUMMARY</env>
+      <env name="UGCSINPUTPATH">/work/06242/tg855414/stampede2/FV3GFS/benchmark-inputs/2012010100/gfs/fcst</env>
+      <env name="UGCSFIXEDFILEPATH">/work/06242/tg855414/stampede2/FV3GFS/fix_am</env>
+      <env name="UGCSADDONPATH">/work/06242/tg855414/stampede2/FV3GFS/addon</env>
+    </environment_variables>
+  </machine>
+
   <default_run_suffix>
     <default_run_exe>${EXEROOT}/cesm.exe </default_run_exe>
     <default_run_misc_suffix> >> cesm.log.$LID 2>&amp;1 </default_run_misc_suffix>
