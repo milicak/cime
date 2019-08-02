@@ -2619,7 +2619,7 @@ This allows using a different mpirun command to launch unit tests
       <init_path lang="sh">/etc/profile.d/modules.sh</init_path>
       <init_path lang="csh">/etc/profile.d/modules.csh</init_path>
       <cmd_path lang="perl">/bin/perl</cmd_path>
-      <cmd_path lang="python">/usr/bin/modulecmd Python/python-2.7.14</cmd_path>
+      <cmd_path lang="python">/usr/bin/modulecmd python</cmd_path>
       <cmd_path lang="sh">module</cmd_path>
       <cmd_path lang="csh">module</cmd_path>
       <modules>
@@ -2639,13 +2639,6 @@ This allows using a different mpirun command to launch unit tests
      </environment_variables>
     <environment_variables comp_interface="nuopc" mpilib="impi">
       <env name="ESMFMKFILE">/okyanus/users/uturuncoglu/progs/esmf-8.0.0b41/install_dir/lib/libO/Linux.intel.64.intelmpi.default/esmf.mk</env>
-    </environment_variables>
-    <environment_variables comp_interface="nuopc">
-      <env name="ESMF_RUNTIME_PROFILE">ON</env>
-      <env name="ESMF_RUNTIME_PROFILE_OUTPUT">SUMMARY</env>
-      <env name="UGCSINPUTPATH">/work/06242/tg855414/stampede2/FV3GFS/benchmark-inputs/2012010100/gfs/fcst</env>
-      <env name="UGCSFIXEDFILEPATH">/work/06242/tg855414/stampede2/FV3GFS/fix_am</env>
-      <env name="UGCSADDONPATH">/work/06242/tg855414/stampede2/FV3GFS/addon</env>
     </environment_variables>
   </machine>
 
